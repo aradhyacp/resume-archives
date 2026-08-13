@@ -25,14 +25,14 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Install LaTeX
         run: |
           sudo apt update
-          sudo apt install -y texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra
+          sudo apt install -y texlive-latex-base texlive-latex-recommended texlive-latex-extra
 
       - name: Archive previous resume version
         id: archive
@@ -120,7 +120,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "📜 Update resume and archive previous version"
+            git commit -m "Update resume and archive previous version"
             git push
           fi
 
