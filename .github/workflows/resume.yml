@@ -1,0 +1,189 @@
+name: Build and Archive Resume
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - main.tex
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: resume-archive-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  RESUME_NAME: Tejpal_Aradhya_CP
+
+jobs:
+  build-and-archive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install LaTeX
+        run: |
+          sudo apt update
+          sudo apt install -y texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra
+
+      - name: Archive previous resume version
+        id: archive
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p archives/latex archives/pdf
+          archive_date=""
+
+          # A push triggered by main.tex contains the new source at HEAD.
+          # Read the previous source and PDF from HEAD^ before compiling.
+          if [[ "$GITHUB_EVENT_NAME" == "push" ]] \
+            && git rev-parse --verify HEAD^ >/dev/null 2>&1 \
+            && git cat-file -e "HEAD^:main.tex" 2>/dev/null; then
+            archive_date="$(git log -1 --format=%ad --date=format:%d-%m-%y HEAD^ -- main.tex)"
+
+            if [[ -z "$archive_date" ]]; then
+              echo "Could not determine the previous resume date."
+              exit 1
+            fi
+
+            archive_stem="${RESUME_NAME}_${archive_date}"
+            suffix=2
+            while [[ -e "archives/latex/${archive_stem}.tex" \
+              || -e "archives/pdf/${archive_stem}.pdf" ]]; do
+              archive_stem="${RESUME_NAME}_${archive_date}-${suffix}"
+              ((suffix++))
+            done
+
+            git show "HEAD^:main.tex" > "archives/latex/${archive_stem}.tex"
+
+            if git cat-file -e "HEAD^:${RESUME_NAME}.pdf" 2>/dev/null; then
+              git show "HEAD^:${RESUME_NAME}.pdf" > "archives/pdf/${archive_stem}.pdf"
+              echo "Archived previous source and PDF as ${archive_stem}."
+            else
+              echo "Archived previous source as ${archive_stem}; no previous PDF was committed."
+            fi
+          else
+            echo "No previous committed resume version to archive."
+          fi
+
+          echo "archive_date=${archive_date}" >> "$GITHUB_OUTPUT"
+          echo "ARCHIVE_DATE=${archive_date:-Not applicable}" >> "$GITHUB_ENV"
+
+      - name: Compile LaTeX to PDF
+        id: compile
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          pdflatex -interaction=nonstopmode -halt-on-error main.tex
+
+          if [[ ! -f main.pdf ]]; then
+            echo "LaTeX compilation failed: main.pdf was not produced."
+            exit 1
+          fi
+
+          echo "PDF compilation successful."
+          ls -la main.pdf
+
+      - name: Install current PDF
+        run: |
+          cp main.pdf "${RESUME_NAME}.pdf"
+          echo "Latest resume PDF updated successfully."
+
+      # - name: Update README
+      #   id: readme
+      #   shell: bash
+      #   run: |
+      #     set -euo pipefail
+
+      #     latest_date="$(date -u +%d-%m-%y)"
+      #     if [[ "$ARCHIVE_DATE" == "Not applicable" ]]; then
+      #       archive_status="No previous version was available to archive."
+      #     else
+      #       archive_status="Previous version archived using date ${ARCHIVE_DATE}."
+      #     fi
+
+      #     cat > README.md <<EOF
+      #     # Resume Archives
+
+      #     The latest version of **Tejpal Aradhya CP's resume** is maintained at stable paths, while every previous version is preserved in the archive directories.
+
+      #     ## Latest Resume
+
+      #     **Current source:** [main.tex](./main.tex)
+
+      #     [View or download the latest resume](./Tejpal_Aradhya_CP.pdf)
+
+      #     **Last automated update:** \`${latest_date}\`
+
+      #     ## Archive
+
+      #     Each resume update preserves the previous version:
+
+      #     - [archives/latex/](./archives/latex/) — historical LaTeX source files
+      #     - [archives/pdf/](./archives/pdf/) — historical compiled PDF files
+
+      #     Matching archive filenames use the same date-based prefix in both directories.
+
+      #     ## Repository Structure
+
+      #     \`\`\`text
+      #     main.tex                 latest editable resume source
+      #     Tejpal_Aradhya_CP.pdf    latest compiled resume
+      #     archives/latex/          historical .tex files
+      #     archives/pdf/            historical .pdf files
+      #     \`\`\`
+
+      #     > ${archive_status}
+
+      #     This README is maintained automatically by GitHub Actions whenever \`main.tex\` changes.
+      #     EOF
+
+      - name: Remove temporary LaTeX files
+        if: always()
+        shell: bash
+        run: |
+          rm -f main.pdf main.aux main.log main.out main.fls main.fdb_latexmk
+
+      - name: Commit generated files
+        id: commit
+        if: steps.compile.outcome == 'success' && steps.readme.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config --local user.email "cparadhya@proton.me"
+          git config --local user.name "aradhyacp"
+
+          git add -- README.md "${RESUME_NAME}.pdf" archives/
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "📜 Update resume and archive previous version"
+            git push
+          fi
+
+      - name: Write workflow summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## 📄 Resume Archive Summary"
+            echo "- **Source:** \`main.tex\`"
+            echo "- **Latest PDF:** \`${RESUME_NAME}.pdf\`"
+            echo "- **Archive date:** ${ARCHIVE_DATE:-Not applicable}"
+            echo "- **Archive status:** ${{ steps.archive.outcome }}"
+            echo "- **Compilation status:** ${{ steps.compile.outcome }}"
+            echo "- **README status:** ${{ steps.readme.outcome }}"
+            echo "- **Commit status:** ${{ steps.commit.outcome }}"
+          } >> "$GITHUB_STEP_SUMMARY"
