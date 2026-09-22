@@ -1,0 +1,207 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+% \usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.65in}
+\addtolength{\textheight}{1.35in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    \textbf{\Huge \scshape Tejpal Aradhya C P} \\ \vspace{1pt}
+    \small +91-90354-64369 $|$ 
+    \href{mailto:cparadhya@proton.me}{\underline{cparadhya@proton.me}} $|$ 
+    \href{https://aradhyacp.in}{\underline{aradhyacp.in}} $|$
+    \href{https://github.com/aradhyacp}{\underline{github.com/aradhyacp}} $|$
+    \href{https://in.linkedin.com/in/tejpal-aradhya-c-p}{\underline{linkedin.com/tejpal-aradhya-c-p}}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Dayananda Sagar College of Engineering}{Bengaluru, KA}
+      {Bachelor of Engineering in Computer Science}{Aug. 2023 -- Present}
+  \resumeSubHeadingListEnd
+
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}, topsep=0pt, itemsep=0pt]
+\small{\item{
+\textbf{Languages}{: JavaScript, TypeScript, Python, C++, C, Bash} \\
+\textbf{Frameworks/Libraries}{: Node js, React.js, Next.js, Express.js} \\
+\textbf{Databases}{: Supabase (PostgreSQL), MongoDB} \\
+\textbf{Tools \& Platforms}{: Linux, Git, GitHub, Docker, Postman, VS Code, Cloudflare Workers} \\
+\textbf{AI \& Automation:} {Agentic AI Workflows, LLM Integration, Prompt Engineering, Security Automation}
+}}
+\end{itemize}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+  {\href{https://www.linkedin.com/company/raisonhq/}{Raison}}{May 2026 -- Aug 2026} {Software Engineer Intern}{Remote}
+  \resumeItemListStart
+    \resumeItem{Built a bilingual (EN/FR) marketing platform using Next.js, Payload CMS, PostgreSQL, and PostHog, with interactive product demos, AI Reality Check survey, lead capture, and SEO/AEO.}
+    \resumeItem{Designed a standalone Node.js chat-connectors service using Vercel Chat SDK and esbuild, integrating WhatsApp with the existing AI tutor through authenticated APIs and supporting quizzes, learner identity, conversation state, and interactive messaging.}
+    \resumeItem{Delivered an end-to-end WhatsApp AI tutoring experience, enabling learners to access the production tutoring agent, courses, quizzes, and teacher messages directly through WhatsApp.}
+  \resumeItemListEnd
+
+
+\resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+\resumeProjectHeading
+{\textbf{LifeGrid} $|$ \emph{JavaScript, Cloudflare Workers, HTML, CSS, SVG, Zod}} 
+{\href{https://github.com/aradhyacp/LifeGrid}{[ GitHub} $|$ \href{https://lifegrid-wallpapers.pages.dev/}{Live ]}}
+\resumeItemListStart
+    \resumeItem{Built and open-sourced a dynamic wallpaper generation platform serving 500+ daily active users}
+    \resumeItem{Designed a serverless SVG-to-PNG rendering pipeline using Cloudflare Workers and resvg-wasm for high-resolution wallpaper generation}
+    \resumeItem{Implemented secure query validation and input sanitization using Zod to prevent malformed or malicious requests}
+    \resumeItem{Optimized real-time rendering for multiple device resolutions and time-based visualizations}
+\resumeItemListEnd
+      \resumeProjectHeading
+{\textbf{Leak-Disclosure} $|$ \emph{React, Node.js, Express, Supabase, Stripe, Clerk}} 
+{\href{https://github.com/aradhyacp/Leak-Disclosure}{[ GitHub ]}}
+\resumeItemListStart
+    \resumeItem{Developed a full-stack SaaS breach monitoring platform with secure authentication and subscription-based access}
+    \resumeItem{Integrated Clerk for JWT-based authentication and protected user session management}
+    \resumeItem{Implemented Stripe subscription billing with webhook handlers to manage recurring payments, upgrades, and cancellations}
+    % \resumeItem{Built automated background monitoring (cron jobs) and real-time email notification system for new data breach alerts}
+\resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+\section*{Open Source Contributions}
+\begin{tabularx}{\textwidth}{X r}
+
+\textbf{\href{https://github.com/Zeecka/AperiSolve}{AperiSolve (Maintainer \& Contributor)}} & \href{https://github.com/Zeecka/AperiSolve/issues?q=is\%3Apr\%20state\%3Aclosed\%20author\%3Aaradhyacp}{Contributions} \\
+\multicolumn{2}{X}{Contributed multiple pull requests to improve functionality and reliability; integrated Sentry for real‑time error monitoring. Fixed CI/CD pipelines and Analyzers.} \\[0.7ex]
+
+\textbf{\href{https://github.com/vercel/streamdown}{Vercel/streamdown (Contributor)}} & 
+\href{https://github.com/vercel/streamdown/issues?q=is\%3Apr\%20author\%3Aaradhyacp}{Contributions} \\
+\multicolumn{2}{X}{Delivered multiple PRs enhancing Markdown UX: improved image fallback handling, implemented table export as Markdown, optimized Mermaid rendering, and added accessibility improvements.} \\[0.7ex]
+
+\textbf{\href{https://github.com/vercel/chat}{Vercel/Chat-SDK (Contributor)}} &
+\href{https://github.com/vercel/chat/issues?q=is\%3Apr\%20author\%3Aaradhyacp}{Contributions} \\
+\multicolumn{2}{X}{Contributed multiple merged PRs to Vercel's open-source Chat SDK, improving cross-platform messaging capabilities across WhatsApp and Google Chat. Enhanced CTA buttons, typing indicators, card/file handling, and Google Chat link formatting.} \\[0.7ex]
+\end{tabularx}
+
+\section*{Achievements \& Involvement}
+\begin{tabularx}{\textwidth}{X r}  % X = left column (stretch), r = right-aligned
+\textbf{Decipher Blitz} & 1\textsuperscript{st} Place \\
+\multicolumn{2}{X}{Solo CTF with timed challenges under 5 minutes; finished 1\textsuperscript{st} organized by Aegis Club Cyber Sec Dept.} \\[0.7ex]
+\textbf{TechnoSeek} & 1\textsuperscript{st} Place \\
+\multicolumn{2}{X}{Competitive CTF event combining flag solving with a treasure hunt experience; our team secured 1\textsuperscript{st} position.} \\[0.7ex]
+\end{tabularx}
+%-------------------------------------------
+\end{document}
