@@ -149,7 +149,7 @@
   {\href{https://www.raison.is/}{Raison}}{May 2026 -- Aug 2026} {Software Engineer Intern}{Paris -- Remote}
   \resumeItemListStart
     \resumeItem{Built a bilingual (EN/FR) marketing platform using Next.js, Payload CMS, PostgreSQL, and PostHog, with interactive product demos,Survey lead capture, and SEO/AEO.}
-    \resumeItem{Architected and developed a standalone Node.js service using Vercel Chat SDK and esbuild, integrating WhatsApp with the existing AI tutor through authenticated APIs and supporting quizzes, learner identity, conversation state, and interactive messaging.}
+    \resumeItem{Architected and developed a standalone Node.js service using Vercel Chat SDK, integrating WhatsApp with the existing AI tutor through authenticated APIs and supporting quizzes, learner identity and interactive messaging.}
     \resumeItem{Delivered an end-to-end WhatsApp AI tutoring experience, enabling learners to access the production tutoring agent, courses, quizzes, and teacher messages directly through WhatsApp.}
   \resumeItemListEnd
 
@@ -160,6 +160,16 @@
 %-----------PROJECTS-----------
 \section{Projects}
     \resumeSubHeadingListStart
+    \resumeProjectHeading
+{\textbf{Scoutly} $|$ \emph{Python, TypeScript, Eve, Trigger.dev, Supabase, Next.js}}
+{\href{https://github.com/aradhyacp/scoutly}{[ GitHub} $|$ \href{https://scoutly-web-fawn.vercel.app/}{Live ]}}
+\resumeItemListStart
+    \resumeItem{Built an automated lead-qualification pipeline that scrapes YC companies and uses an AI agent to research and
+enrich company data.}
+    \resumeItem{Orchestrated per-company enrichment with Trigger.dev, implementing bounded concurrency, exponential-backoff retries, and idempotent execution for reliable batch processing}
+    \resumeItem{Developed a natural-language query interface that generates SQL, validates read-only queries, and executes them within PostgreSQL read-only transactions}
+\resumeItemListEnd
+
 \resumeProjectHeading
 {\textbf{LifeGrid} $|$ \emph{JavaScript, Cloudflare Workers, HTML, CSS, SVG, Zod}} 
 {\href{https://github.com/aradhyacp/LifeGrid}{[ GitHub} $|$ \href{https://lifegrid-wallpapers.pages.dev/}{Live ]}}
@@ -167,18 +177,7 @@
     \resumeItem{Built and open-sourced a dynamic wallpaper generation platform serving 500+ daily active users}
     \resumeItem{Designed a serverless SVG-to-PNG rendering pipeline using Cloudflare Workers and resvg-wasm for high-resolution wallpaper generation}
     \resumeItem{Implemented secure query validation and input sanitization using Zod to prevent malformed or malicious requests}
-    \resumeItem{Optimized real-time rendering for multiple device resolutions and time-based visualizations}
 \resumeItemListEnd
-      \resumeProjectHeading
-{\textbf{Leak-Disclosure} $|$ \emph{React, Node.js, Express, Supabase, Stripe, Clerk}} 
-{\href{https://github.com/aradhyacp/Leak-Disclosure}{[ GitHub ]}}
-\resumeItemListStart
-    \resumeItem{Developed a full-stack SaaS breach monitoring platform with secure authentication and subscription-based access}
-    \resumeItem{Integrated Clerk for JWT-based authentication and protected user session management}
-    \resumeItem{Implemented Stripe subscription billing with webhook handlers to manage recurring payments, upgrades, and cancellations}
-    % \resumeItem{Built automated background monitoring (cron jobs) and real-time email notification system for new data breach alerts}
-\resumeItemListEnd
-
     \resumeSubHeadingListEnd
 
 \section*{Open Source Contributions}
